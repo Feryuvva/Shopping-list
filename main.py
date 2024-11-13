@@ -136,9 +136,7 @@ async def send_welcome(message: Message):
 # Запуск бота
 async def main() -> None:
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-    router = Router()
     await init_db()
-    dp.include_router(router)
     
     print('Бот включен')
     try:
@@ -146,7 +144,6 @@ async def main() -> None:
     finally:
         await bot.session.close()
         await dp.fsm.storage.close()
-        await dp.fsm.storage.wait_closed()
 
 if __name__ == '__main__':
     asyncio.run(main())
